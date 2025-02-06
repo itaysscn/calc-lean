@@ -1,0 +1,30 @@
+<div class="container">
+    <h2>מחשבון הלוואות</h2>
+    
+    <form #loanForm="ngForm" (ngSubmit)="onSubmit()">
+      <div>
+        <label>מזהה לקוח:</label>
+        <input type="number" [(ngModel)]="loanRequest.clientId" name="clientId" required>
+      </div>
+  
+      <div>
+        <label>סכום ההלוואה:</label>
+        <input type="number" [(ngModel)]="loanRequest.amount" name="amount" required>
+      </div>
+  
+      <div>
+        <label>תקופת ההלוואה (חודשים):</label>
+        <input type="number" [(ngModel)]="loanRequest.periodMonths" name="periodMonths" required>
+      </div>
+  
+      <button type="submit" [disabled]="loanForm.invalid">חשב הלוואה</button>
+    </form>
+  
+    <div *ngIf="loanResponse" class="result">
+      <h3>תוצאות ההלוואה</h3>
+      <p>סכום כולל לתשלום: {{ loanResponse.totalAmount | number:'1.2-2' }} ₪</p>
+      <p>סכום ריבית: {{ loanResponse.interestAmount | number:'1.2-2' }} ₪</p>
+      <p>{{ loanResponse.message }}</p>
+    </div>
+  </div>
+  
